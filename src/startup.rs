@@ -24,6 +24,8 @@ pub fn start() -> Vec<String> {
             if let Ok(task) = line {
                 //println!("{}", task);
                 tasks_database.push(task.to_string());
+            } else {
+                tasks_database = Vec::new();
             }
         }
     }

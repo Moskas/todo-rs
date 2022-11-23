@@ -6,7 +6,7 @@ mod startup;
 #[command(author, version, about, long_about = None)]
 struct Args {
     /// List tasks
-    #[arg(short, long, default_value_t = true)]
+    #[arg(short, long, default_value_t = false)]
     list_tasks: bool,
     /// Add task
     #[arg(short, long, default_value_t = String::new(), hide_default_value = true)]
@@ -19,9 +19,8 @@ struct Args {
 fn main() {
     let current_tasks: Vec<String> = startup::start();
     let args = Args::parse();
-    if args.index >= 0 {
+    if args.index > 0 {
         save::delete_task(current_tasks.clone(), args.index as usize);
-        //save::list(current_tasks.clone());
     }
     if args.task != String::new() {
         println!("Added {}!", args.task);
